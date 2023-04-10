@@ -1,0 +1,41 @@
+body {
+    padding: 20px;
+    text-align: center;
+    background-color: #0a3844;
+}
+
+#widget {
+ width: 50%;
+ background-color: #555;
+ margin: 0 auto ;
+ padding: 10px;
+}
+
+#counter {
+ height: 50px;
+ width: 50%;
+ margin: 0 auto;
+ background-color: #fff;
+ color: rgb(154, 20, 227);
+ text-align: center;
+ line-height: 50px;
+ font-size: 30px;
+ }
+
+#inc {
+ margin-top: 10px;
+ height: 50px;
+ width: 50px;
+ background-color: #1555bc;
+ color: #fff;
+ text-align: center;
+ line-height: 50px;
+ font-size: 20px;
+ border: 0px;
+}
+
+#inc:hover {
+ cursor: pointer;
+ background-color: #8cb8ff;
+ color:#fff ;
+}

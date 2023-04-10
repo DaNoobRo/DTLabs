@@ -1,0 +1,18 @@
+body { 
+	padding: 20px;
+	text-align: center;
+	background-color: #73E6F0
+
+}
+
+#ceva {
+ margin-top:10 px;
+ height : 50 px;
+ width : 50 px;
+ background-color : #44888F ;
+ color : #F5F5F5 ;
+ text-align : center ;
+ line-height : 50 px;
+ font-size : 20 px;
+ border: 0px;
+ }

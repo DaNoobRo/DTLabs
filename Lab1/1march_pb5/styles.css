@@ -1,0 +1,50 @@
+body {
+    padding: 20px;
+    text-align: center;
+    background-color: #26044f;
+}
+
+#result {
+ height: 50px;
+ width: 50%;
+ margin: 0 auto;
+ background-color: #fafafa;
+ color: #555;
+ text-align: center;
+ line-height: 50px;
+ font-size: 30px;
+}
+
+#widget {
+ width: 60px;
+ background-color: #555;
+ margin: 0 auto ;
+ padding: 10px;
+}
+
+#sum,#dif,#sub,#mul,#equal {
+ margin-top: 10px;
+ height: 50px;
+ width: 50px;
+ background-color: #bd5bff;
+ color: #ffffffea;
+ text-align: center;
+ line-height: 50px;
+ font-size: 20px;
+ border: 0px;
+}
+#sum:focus{
+    background-color: #27db81;
+} 
+#dif:focus{
+    background-color: #27db81;
+}
+#sub:focus{
+    background-color: #27db81;
+}
+#mul:focus{
+    background-color: #27db81;
+}
+#equal:focus{
+    background-color: #27db81;
+}
