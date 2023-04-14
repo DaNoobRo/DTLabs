@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         dataBits: [],
         status: '',
-        numberOfDataBits: 5
+        numberOfDataBits: 4
     },
     created: function () {
         this.initDataBits(4);
@@ -30,41 +30,23 @@ var app = new Vue({
             }
         },
         encode: function(bits){
-            switch(bits.length){
-                case 5:{
-            var c4=this.parity(parseInt(bits[1].data)+parseInt(bits[2].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 4
-            var c2=this.parity(parseInt(bits[0].data)+parseInt(bits[2].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 2
-            var c1=this.parity(parseInt(bits[0].data)+parseInt(bits[1].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 1
-            var parityBit = this.parity(c1 + c2 + c4 + bits[0].data + bits[1].data + bits[2].data + bits[3].data);
-            // var C0 = this. ...
-            if(parseInt(parityBit) === parseInt(bits[4].data)){
-                console.log("Parity bit is correct");
-            } else {
-                console.log("Parity bit is incorrect, should be " + parityBit);
+            if(bits.length==4){
+                var c4=this.parity(parseInt(bits[1].data)+parseInt(bits[2].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 4
+                var c2=this.parity(parseInt(bits[0].data)+parseInt(bits[2].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 2
+                var c1=this.parity(parseInt(bits[0].data)+parseInt(bits[1].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 1
+                console.log("Control bits: "+c1+","+c2+","+c4);
+                return [c1,c2,parseInt(bits[0].data),c4,parseInt(bits[1].data),parseInt(bits[2].data),parseInt(bits[3].data)]; // vectorul V (cuvantul de transmis)
             }
-			console.log("Control bits: "+c1+","+c2+","+c4, "Parity bit: "+parityBit);
-            return [c1,c2,parseInt(bits[0].data),c4,parseInt(bits[1].data),parseInt(bits[2].data),parseInt(bits[3].data)]; // vectorul V (cuvantul de transmis)
+            else{
+                var c8=this.parity(parseInt(bits[4].data)+parseInt(bits[5].data)+parseInt(bits[6].data)+parseInt(bits[7].data));
+                var c4=this.parity(parseInt(bits[1].data)+parseInt(bits[2].data)+parseInt(bits[3].data)+parseInt(bits[7].data));
+                var c2=this.parity(parseInt(bits[0].data)+parseInt(bits[2].data)+parseInt(bits[3].data)+parseInt(bits[5].data)+parseInt(bits[6].data));
+                var c1=this.parity(parseInt(bits[0].data)+parseInt(bits[1].data)+parseInt(bits[3].data)+parseInt(bits[4].data)+parseInt(bits[6].data));
+                console.log("Control bits: "+c1+","+c2+","+c4+","+c8);
+                return [c1,c2,parseInt(bits[0].data),c4,parseInt(bits[1].data),parseInt(bits[2].data),parseInt(bits[3].data),c8,parseInt(bits[4].data),parseInt(bits[5].data),parseInt(bits[6].data),parseInt(bits[7].data)]; // vectorul V (cuvantul de transmis)
             }
-            case 9:{
-            var c8 = this.parity(parseInt(bits[4].data)+parseInt(bits[5].data)+parseInt(bits[6].data)+parseInt(bits[7].data)); // se calculeaza bitul de control de pe pozitia 8
-            var c4=this.parity(parseInt(bits[1].data)+parseInt(bits[2].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 4
-            var c2=this.parity(parseInt(bits[0].data)+parseInt(bits[2].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 2
-            var c1=this.parity(parseInt(bits[0].data)+parseInt(bits[1].data)+parseInt(bits[3].data)); // se calculeaza bitul de control de pe pozitia 1
-            var parityBit = this.parity(c1 + c2 + c4 + bits[0].data + bits[1].data + bits[2].data + bits[3].data);
-
-            var parityBit = this.parity(c1 + c2 + c4 + c8 + bits[0].data + bits[1].data + bits[2].data + bits[3].data + bits[4].data + bits[5].data + bits[6].data + bits[7].data);
-
-            if(parseInt(parityBit) === parseInt(bits[8].data)){ 
-                console.log("Parity bit is correct");
-            } else {
-                console.log("Parity bit is incorrect, should be " + parityBit);
-            }
-            console.log("Control bits: "+c1+","+c2+","+c4+","+c8, "Parity bit: "+ parityBit);
-
-            return [c1,c2,parseInt(bits[0].data),c4,parseInt(bits[1].data),parseInt(bits[2].data),parseInt(bits[3].data),c8, parseInt(bits[4].data), parseInt(bits[5].data), parseInt(bits[6].data), parseInt(bits[7].data)];
-            }
-        }
-    },
+			
+        },
         parity: function(number){
             return number % 2;
         },
